@@ -70,7 +70,8 @@ label mavdp_four_c2aggravation:
             $ renpy.pause (0.5)
             show sebastian normal b with dissolve
         "[[Say nothing.]":
-            pass
+            $ renpy.pause(0.8)
+            m "It took a little while for Bryce to return."
     $ renpy.pause (0.9)
     hide sebastian with easeoutright
     show sebastian normal b flip at left with easeinleft
@@ -94,8 +95,39 @@ label mavdp_four_c2reinstated:
             show maverick normal b with dissolve
         "Okay. Then start talking.":
             pass
-    
+
+    Mv "I know you talked to Bryce. He only mentioned offhandedly, but this isn't like him."
     Mv "Just tell me one thing: Why?"
     Mv "What is your goal in all of this?"
-    Mv "Why get me reinstated?"
-    $ renpy.error("TODO: Remainder of meeting.")
+    Mv "Why get me reinstated, when you know I {i}will{/i} get to the bottom of whatever it is you're doing?"
+
+    menu:
+        "Because working together is the best way to find the truth.":
+            c "I came as an ambassador and that's what I'm here to be. I want to know why Reza's doing what he's been doing just as much as you do."
+            Mv "No, no, no. That won't do."
+            Mv "That's simply not true. You know it, and I know it. You convinced Bryce to take me off sick leave, under the guise of sharing information, yet now you tell me nothing?"
+            $ c2mav = "ambassador"
+        "You wouldn't understand.":
+            Mv "What would I not understand?"
+            Mv "You convinced Bryce to take me off sick leave, under the guise of sharing information, yet now you tell me nothing?"
+            $ c2mav = "understand"
+
+    c "I'm being honest with you. You're too close to this emotionally to--"
+    Mv angry b "There are no emotions to this. Only the fact that Reza is doing what he's doing."
+    Mv normal b "As are you."
+    Mv "Was getting me reinstated a way to place me back on guard duties? To slow me down? Or to place me in the way of your future attacks?"
+    Mv normal b "I just don't get why you won't tell me anything, even when you know no one else is listening."
+    Mv "You know I can't touch you. If I did, it would be over for me. At least, as long as I don't have any proof."
+    Mv "I could've saved the world with what I did that day and it still wouldn't matter when no one believes me. Just because I don't have any proof."
+    $ renpy.pause(0.8)
+    Mv "..."
+    show maverick nice b with dissolve
+    $ renpy.pause(0.3)
+    m "A slight light seemed to come on behind his eyes."
+    Mv normal b "Maybe this is still too public for you. Is that it?"
+    Mv "Fine."
+    m "He scratched some digits into the dirt path."
+    Mv "Call, and I will give you a time and place even more remote. Or do not, and continue your charade."
+    Mv angry b "If you won't tell me, I won't stop until I find out what you're planning."
+    Mv normal b "And when I do, I'm gonna be a damn hero."
+    jump mavdp_four_c2reinstated_damnhero

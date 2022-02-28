@@ -51,7 +51,9 @@ class DontPretendMod(modclass.Mod):
 
         ( ml.find_label('_call_skiptut_12')
             .search_say("Look who we have here.")
-            .hook_to('mavdp_four_c2reinstated')
+            .hook_to('mavdp_four_c2reinstated', return_link=False)
+            .search_hide('maverick')
+            .link_from('mavdp_four_c2reinstated_damnhero')
         )
 
     @staticmethod
