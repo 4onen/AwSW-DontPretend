@@ -13,7 +13,7 @@ I am, however, not planning to do the romance part.
 
 - [x] Have Bryce pull Maverick aside, meet him back at the police station, and reinstate him.
 
-- [ ] (Active) Have reinstated Maverick confront you in broad daylight, as per Chapter 2 investigation.
+- [x] Have reinstated Maverick confront you in broad daylight, as per Chapter 2 investigation.
 
 - [ ] Have Maverick meet you on a "date" in Chapter 2 to interrogate you, then change his opinion about you as per Chapter 4 in Bryce's path (but early!)
 </details>
