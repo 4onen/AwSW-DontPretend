@@ -6,6 +6,7 @@ I am, however, not planning to do the romance part.
 
 <details>
 <summary>Current progress: (Here there be spoilers!)</summary>
+
 - [x] Give the player less rude options for speaking with Maverick in the Chapter 1 investigation.
 
 - [x] Give the player the option to talk to Bryce about Maverick during Bryce1, if they were less rude than canon in the Chapter 1 investigation.
