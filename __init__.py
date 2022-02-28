@@ -48,6 +48,14 @@ def setup_scenes():
         .link_from('mavdp_four_c2reinstated_damnhero')
     )
 
+
+def mav2():
+    ( ml.CharacterRoute('mavdp','Maverick')
+        .add_date(jump='mavdp_four_mav2',chapters=[2])
+        .build()
+    )
+
+
 @modclass.loadable_mod
 class DontPretendMod(modclass.Mod):
     name = "Don't Pretend"
@@ -57,6 +65,7 @@ class DontPretendMod(modclass.Mod):
     @staticmethod
     def mod_load():
         setup_scenes()
+        mav2()
 
     @staticmethod
     def mod_complete():
