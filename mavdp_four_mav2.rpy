@@ -1,10 +1,12 @@
 label mavdp_four_mav2:
     m "I picked up the phone, pulling out the scrap of paper on which I'd written down Maverick's number."
     c "(I might as well try, right?)"
-    # TODO: Dialing noises or something. This silence sucks.
-    $ renpy.pause(0.5)
+    play sound "fx/phonepickup.ogg"
+    $ renpy.pause(0.8)
     m "Before I could say anything, Maverick spoke."
-    Mv normal b "The forest behind your home. Just after sunset."
+    Mv normal b "The forest behind your apartment. Just after sunset."
+    play sound "fx/phonesetdown.ogg"
+    $ renpy.pause(0.8)
     m "Then he hung up."
     c "(Nothing to do but wait, then.)"
     $ renpy.pause(1.0)
@@ -17,7 +19,8 @@ label mavdp_four_mav2:
     scene black with dissolvemed
     play music "mx/amb/night.ogg" fadein 5.0
     play sound "fx/steps/rough_gravel.wav"
-    scene forestx at Pan((0, 360), (0, 0), 10.0) with dissolveslow
+    scene forestx at Pan((0, 360), (0, 0), 8.0) with dissolveslow
+    $ renpy.pause(3.0)
     m "I wasn't clear on exactly how far into the forest to walk, nor what would await me when I got there."
     show maverick normal dk with dissolvemed
     m "Well into the woods, I spotted Maverick, his monochrome grey hues blending well with the darkness of the moonlit forest."
