@@ -74,6 +74,7 @@ label mavdp_four_c2aggravation:
             $ renpy.pause(0.8)
             m "It took a little while for Bryce to return."
     $ renpy.pause (0.9)
+    $ mavdp_four_store.maverickstatus = "reinstated"
     hide sebastian with easeoutright
     show sebastian normal b flip at left with easeinleft
     show bryce stern b at right with easeinright
@@ -85,6 +86,7 @@ label mavdp_four_c2aggravation:
 label mavdp_four_c2reinstated:
     play music "mx/mysteryambience.ogg"
     show maverick normal b with dissolve
+    $ mavdp_four_store.maverickstatus = "reinstated"
     m "I turned around to see Maverick. His intense gaze confirmed that there was no one else his words could have been directed at. To my surprise, his police badge once again swung from his neck."
     c "What do you want from me?"
     Mv "Answers."
