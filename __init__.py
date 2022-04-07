@@ -43,7 +43,7 @@ def setup_scenes():
 
     ( ml.find_label('_call_skiptut_12')
         .search_say("Look who we have here.")
-        .hook_to('mavdp_four_c2reinstated', return_link=False)
+        .hook_to('mavdp_four_c2reinstated', condition='mavdp_four_store.bryce1_said == True', return_link=False)
         .search_hide('maverick')
         .link_from('mavdp_four_c2reinstated_damnhero')
     )
