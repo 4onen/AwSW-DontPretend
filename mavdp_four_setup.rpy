@@ -64,9 +64,10 @@ label mavdp_four_c2aggravation:
             c "But not Maverick."
         "I think they'll patch things up.":
             Sb "Why?"
-            c "I asked Bryce to take Maverick off sick leave."
+            c "I talked with Bryce about why Maverick is on sick leave."
+            c "It didn't make sense to me to run parallel investigations, and it's clear he's not just resting."
             $ renpy.pause (0.5)
-            Sb drop b "If you think that's a good idea."
+            Sb drop b "I see."
             $ renpy.pause (0.5)
             show sebastian normal b with dissolve
         "[[Say nothing.]":
