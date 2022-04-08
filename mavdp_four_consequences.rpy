@@ -1,8 +1,8 @@
 label mavdp_four_c3investigation_patrol_fix:
-    Br brow b "Maverick. But he didn't report anything amiss."
     stop music fadeout 2.0
+    Br brow b "Maverick was guarding last night. But he didn't report anything amiss."
     Sb "Maybe only one night guard isn't enough."
-    Br stern b "But we don't have the people to keep more and still look at anything else."
+    Br stern b "But we don't have the people to spare, while still investigating anything else."
     play music "mx/judgement.ogg" fadein 2.0
     Sb "So then Reza must have managed to sneak past Maverick."
     jump mavdp_four_c3investigation_patrol_fix_end

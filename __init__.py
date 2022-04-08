@@ -61,7 +61,7 @@ def register_setup_scenes():
 def register_consequences():
     # It's known Maverick is the night patrol if he's reinstated.
     ( ml.find_label('_call_skiptut_4')
-        .search_say("And who was patrolling last night?", depth=1200)
+        .search_say("What about the night patrol, then?", depth=1200)
         .hook_to('mavdp_four_c3investigation_patrol_fix', condition='mavdp_four_store.maverickstatus in ["good","neutral","reinstated"]', return_link=False)
         .search_say("Why would he have done it? He'd be cutting off his only way out.")
         .link_from('mavdp_four_c3investigation_patrol_fix_end')
