@@ -130,6 +130,16 @@ class DontPretendMod(modclass.Mod):
         register_consequences()
         register_dates()
 
+        ( ml.StatusBox('mavdp_four_store.mavscenesfinished', 'mavdp_four_store.c1investigation_said != "aggressive"')
+            .add_status("image/ui/status/maverick_status_dead.png", "--", 'mavdp_four_store.maverickstatus == "dead"')
+            .add_status("image/ui/status/maverick_status_neutral.png", "Neutral", 'mavdp_four_store.maverickstatus == "neutral" or brycegoodending')
+            .add_status("image/ui/status/maverick_status_suspicious.png", "Suspicious", 'mavdp_four_store.maverickstatus == "suspicious"')
+            .add_status("image/ui/status/maverick_status_suspicious_b.png", "Suspicious", 'mavdp_four_store.maverickstatus == "reinstated"')
+            .add_status("image/ui/status/maverick_status_reported.png", "Bad", 'mavdp_four_store.maverickstatus == "reported"')
+            .add_status("image/ui/status/maverick_status_good.png", "Good", 'mavdp_four_store.maverickstatus == "good"')
+            .build()
+        )
+
     @staticmethod
     def mod_complete():
         pass
