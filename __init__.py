@@ -1,4 +1,6 @@
-from modloader import modclass, modinfo
+from modloader import modclass
+
+from renpy.exports import has_label
 
 import jz_magmalink as ml
 
@@ -26,6 +28,13 @@ def setup_scenes():
         .add_choice("I also wanted to ask about Maverick.", jump='mavdp_four_bryce1_otherreason', condition='mavdp_four_store.c1investigation_said != "aggressive"')
         .link_behind_from('mavdp_four_bryce1_otherreason_end')
     )
+
+    if has_label('tt_bryce1_drink2_lightordry'):
+        ( ml.find_label('tt_bryce1_drink2_lightordry')
+            .search_menu()
+            .add_choice("I also wanted to ask about Maverick.", jump='mavdp_four_bryce1_otherreason_teetoaller', condition='mavdp_four_store.c1investigation_said != "aggressive"')
+            .link_behind_from('mavdp_four_bryce1_otherreason_teetotaller_end')
+        )
 
     ( ml.find_label('_call_skiptut_11')
         .search_if('brycebar == True')
@@ -61,6 +70,7 @@ class DontPretendMod(modclass.Mod):
     name = "Don't Pretend"
     author = "4onen"
     version = "v0.0"
+    dependencies = ["MagmaLink", "?Teetotaller"]
 
     @staticmethod
     def mod_load():

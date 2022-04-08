@@ -2,6 +2,8 @@ init python in mavdp_four_store:
     c1investigation_said = "aggressive"
     bryce1_said = False
 
+default bryce1_teetotaller = False
+
 label mavdp_four_c1aggravation:
     menu:
         "What's your problem?":
@@ -16,6 +18,8 @@ label mavdp_four_c1aggravation:
             $ mavdp_four_store.c1investigation_said = "nothing"
             jump mavdp_four_c1aggravation_end
 
+label mavdp_four_bryce1_otherreason_teetoaller:
+    $ mavdp_four_store.bryce1_teetotaller = True
 label mavdp_four_bryce1_otherreason:
     Br stern "I see."
     c "No, no. This isn't that serious."
@@ -38,6 +42,10 @@ label mavdp_four_bryce1_otherreason:
     c "I'm just suggesting: think about it. And letting you know that I'm not opposed, and that I don't take his tackling of me after he was shot as seriously as you do."
     $ mavdp_four_store.bryce1_said = True
     $ renpy.pause(0.8)
+    if mavdp_four_store.bryce1_teetotaller:
+        c "Sorry, that was a lot. We should probably move on with our evening."
+        Br normal "Yeah. That'd be nice."
+        jump mavdp_four_bryce1_otherreason_teetotaller_end
     c "Sorry, that was a lot. Want to get back to our game?"
     show bryce normal with dissolve
     $ renpy.pause(0.3)
