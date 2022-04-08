@@ -111,8 +111,8 @@ def register_consequences():
 
 def register_dates():
     ( ml.CharacterRoute('mavdp','Maverick')
-        .add_date(jump='mavdp_four_mav2',chapters=[2], condition='mavdp_four_store.maverickstatus == "reinstated"')
-        # .add_date(jump='mavdp_four_mav3',chapters=[3], condition='mavdp_four_store.maverickstatus != "reported"')
+        .add_date(jump='mavdp_four_mav2', chapters=[2], condition='mavdp_four_store.maverickstatus == "reinstated"')
+        .add_date(jump='mavdp_four_mav3', chapters=[3], condition='mavdp_four_store.maverickstatus != "reported"')
         .build()
     )
 
