@@ -4,7 +4,7 @@ from renpy.exports import has_label
 
 import jz_magmalink as ml
 
-def setup_scenes():
+def register_setup_scenes():
     ( ml.find_label('quest6')
         .search_say("Oh, it's the human!")
         .search_say("I suppose we'll head off too, unless- oh no.")
@@ -58,9 +58,61 @@ def setup_scenes():
     )
 
 
-def mav2():
+def register_consequences():
+    # It's known Maverick is the night patrol if he's reinstated.
+    ( ml.find_label('_call_skiptut_4')
+        .search_say("And who was patrolling last night?", depth=1200)
+        .hook_to('mavdp_four_c3investigation_patrol_fix', condition='mavdp_four_store.maverickstatus in ["good","neutral","reinstated"]', return_link=False)
+        .search_say("Why would he have done it? He'd be cutting off his only way out.")
+        .link_from('mavdp_four_c3investigation_patrol_fix_end')
+        .search_say("I'm sure that wouldn't be the only reason they'd benefit, though. There must be something we're not aware of.")
+        .hook_to('mavdp_four_c3investigation_patrol_fix2', condition='mavdp_four_store.maverickstatus in ["good","neutral","reinstated"]', return_link=False)
+        .search_say("But they still have the greatest motives.")
+        .link_from('mavdp_four_c3investigation_patrol_fix2_end')
+    )
+
+    # Bryce3 doesn't happen if Maverick is reported.
+    ( ml.find_label('bryce3')
+        .search_scene('black')
+        .search_with()
+        .hook_to('mavdp_four_bryce3_cancelled', condition='mavdp_four_store.maverickstatus == "reported"', return_link=False)
+        .search_menu("Sure.")
+        .add_choice("I-I can't. I--", jump='mavdp_four_bryce3_report', condition='mavdp_four_store.maverickstatus == "neutral"')
+    )
+
+    # In Chapter4, Maverick gets his private meeting with Bryce if things aren't peachy.
+    ( ml.find_label('_call_skiptut_20')
+        .search_show("maverick normal flip").search_with()
+        .hook_to('mavdp_four_c4meeting.ontheteam', condition='mavdp_four_store.maverickstatus in ["reinstated","neutral","good"]', return_link=False)
+        .search_say("Chief, can I talk to you? Alone?")
+        .hook_to('mavdp_four_c4meeting.nowherenear', condition='mavdp_four_store.maverickstatus == "reported"', return_link=False)
+        .search_say("Reza.")
+        .link_from('mavdp_four_c4meeting.nowherenear_end')
+        .search_say("I think I know where Reza is.")
+        .link_from('mavdp_four_c4meeting.know_where_reza_is')
+        .search_say("Just a few minutes ago. When I did, I immediately came here.")
+        .hook_to('mavdp_four_c4meeting.forgot_badge', condition='mavdp_four_store.maverickstatus in ["reinstated","neutral","good"]', return_link=True)
+        .search_say("As if we had one to spare. Heck, we're going there right now.")
+        .hook_to('mavdp_four_c4meeting.going', condition='mavdp_four_store.maverickstatus != "bad"', return_link=False)
+        .search_say("How about you, [player_name]?")
+        .link_from('mavdp_four_c4meeting_how_about_player')
+        .search_say("After you, Chief.")
+        .hook_to('mavdp_four_c4meeting.after_you', condition='mavdp_four_store.maverickstatus != "bad"', return_link=False)
+        .search_say("Then I had to wait. Bryce and Sebastian were observing the farm now, and if anything new happened, I would be the first to know.")
+        .link_from('mavdp_four_c4meeting_after_you_end')
+    )
+
+    # In Chapter4, at the farmhouse, if Maverick is on the team, he'd have spotted Reza.
+    ( ml.find_label('didit')
+        .search_say("Maybe he ran when he saw us approach.")
+        .hook_to('mavdp_four_c4farmhouse.mayberan', condition='mavdp_four_store.maverickstatus in ["good","neutral","reinstated"]', return_link=True)
+    )
+
+
+def register_dates():
     ( ml.CharacterRoute('mavdp','Maverick')
-        .add_date(jump='mavdp_four_mav2',chapters=[2])
+        .add_date(jump='mavdp_four_mav2',chapters=[2], condition='mavdp_four_store.maverickstatus == "reinstated"')
+        # .add_date(jump='mavdp_four_mav3',chapters=[3], condition='mavdp_four_store.maverickstatus != "reported"')
         .build()
     )
 
@@ -74,8 +126,9 @@ class DontPretendMod(modclass.Mod):
 
     @staticmethod
     def mod_load():
-        setup_scenes()
-        mav2()
+        register_setup_scenes()
+        register_consequences()
+        register_dates()
 
     @staticmethod
     def mod_complete():

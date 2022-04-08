@@ -319,6 +319,7 @@ label mavdp_four_mav2:
             m "Without another word, I left him in the woods, already planning what I'd say to Bryce on the phone."
             stop sound fadeout 0.5
             $ mavdp_four_store.maverickstatus = "reported"
+            $ mavdp_four_store.mavscenesfinished = 1
             jump ml_date_end
         "Yeah. You were.":
             c "This... Maverick, this was too much."
@@ -334,6 +335,7 @@ label mavdp_four_mav2:
             $ renpy.pause(0.5)
             Mv "{size=-8}I'm sorry.{/size}"
             $ mavdp_four_store.maverickstatus = "neutral"
+            $ mavdp_four_store.mavscenesfinished = 1
             stop music fadeout 1.0
             stop sound fadeout 1.0
             $ renpy.pause(0.5)
@@ -366,4 +368,5 @@ label mavdp_four_mav2:
             $ renpy.pause(0.5)
             m "Wordlessly, Maverick came to my aid, helping me limp the moderate distance back to the apartment."
             $ mavdp_four_store.maverickstatus = "good"
+            $ mavdp_four_store.mavscenesfinished = 1
             jump ml_date_end

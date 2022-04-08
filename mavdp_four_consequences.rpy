@@ -1,6 +1,21 @@
+label mavdp_four_c3investigation_patrol_fix:
+    Br brow b "Maverick. But he didn't report anything amiss."
+    stop music fadeout 2.0
+    Sb "Maybe only one night guard isn't enough."
+    Br stern b "But we don't have the people to keep more and still look at anything else."
+    play music "mx/judgement.ogg" fadein 2.0
+    Sb "So then Reza must have managed to sneak past Maverick."
+    jump mavdp_four_c3investigation_patrol_fix_end
+
+label mavdp_four_c3investigation_patrol_fix2:
+    Br "Or maybe we're looking at this from the wrong angle. It might not be Reza at all. Plenty of dragons could have managed to sneak up too. It doesn't necessarily have anything to do with Reza or humanity."
+    jump mavdp_four_c3investigation_patrol_fix_end
+
+
 label mavdp_four_bryce3_cancelled:
     $ renpy.pause (1.0)
-    scene o2 at Pan((0, 250), (0, 250), 0.0) with dissolvemed
+    play sound "fx/phonering.ogg"
+    scene o2 at Pan((0, 250), (0, 250), 0.0) with dissolveslow
     play sound "fx/phonepickup.ogg"
     c "Uh, hello?"
     Br stern "Hey, [player_name]. It's Bryce."
@@ -9,7 +24,8 @@ label mavdp_four_bryce3_cancelled:
     c "Huh?"
     Br brow "Normally Maverick would be there. After what he did to you, though..."
     c "Forget it, then. I'm not going."
-    Br stern "Don't worry about it. Neither am I. It's cancelled."
+    Br stern "Don't worry about it. Neither am I. Or anyone else. It's cancelled."
+    Br "Nobody really wanted to go with everything going on."
     c "Oh."
     Br stern "Anyway. Since I have the evening back, I'm going to focus on getting through paperwork."
     Br "We'll have to catch up another time."
@@ -62,3 +78,67 @@ label mavdp_four_bryce3_report:
             m "Without another word, I turned and left."
     jump _mod_fixjmp
 
+
+label mavdp_four_c4meeting:
+    label .nowherenear:
+        Br stern b "You know you're not supposed to be anywhere near [player_name]."
+        Br stern b "We're also quite busy here. What is this about?"
+        jump mavdp_four_c4meeting.nowherenear_end
+
+    label .ontheteam:
+        play music "mx/intrigue.ogg"
+        Br brow b "Maverick? What have you got."
+        jump mavdp_four_c4meeting.know_where_reza_is
+
+    label .forgot_badge:
+        Br "Hence forgetting your badge. Alright."
+        jump mavdp_four_c4meeting.forgot_badge_return
+
+    label .going:
+        if mavdp_four_store.maverickstatus == "reported":
+            Br "Well, Maverick, I'd like to have you there, but right now you need to get the heck away from [player_name] and back on your 'sick leave'."
+            Mv "I understand."
+            $ renpy.pause (0.3)
+            show maverick normal
+            $ renpy.pause (0.3)
+            hide maverick with easeoutleft
+            $ renpy.pause (0.3)
+            play sound "fx/door/doorclose.ogg"
+            $ renpy.pause (0.8)
+            jump mavdp_four_c4meeting_how_about_player
+        else:
+            Br "Maverick, you okay with working some off-hours?"
+            Mv "Of course."
+            jump mavdp_four_c4meeting_how_about_player
+
+    label .after_you:
+        if mavdp_four_store.maverickstatus != "reported":
+            Br "And Maverick: Good job."
+            Mv "Thanks, Chief."
+
+        python:
+            if mavdp_four_store.maverickstatus in ["neutral","good"]:
+                brycegoodending = True
+
+        show bryce stern b flip
+        $ renpy.pause (0.3)
+        hide bryce with easeoutright
+        show sebastian normal b flip
+        $ renpy.pause (0.3)
+        hide sebastian with easeoutright
+        $ renpy.pause (0.5)
+        if mavdp_four_store.maverickstatus != "reported:":
+            $ renpy.pause (0.3)
+            show maverick normal
+            stop music fadeout 2.0
+            $ renpy.pause (0.3)
+            hide maverick with easeoutleft
+            $ renpy.pause (0.3)
+
+        play sound "fx/door/doorclose.ogg"
+        jump mavdp_four_c4meeting_after_you_end
+
+label mavdp_four_c4farmhouse:
+    label .mayberan:
+        Br "Couldn't have. Maverick would have spotted him from the air."
+        jump mavdp_four_c4farmhouse.mayberan_return
