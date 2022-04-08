@@ -70,7 +70,7 @@ class DontPretendMod(modclass.Mod):
     name = "Don't Pretend"
     author = "4onen"
     version = "v0.0"
-    dependencies = ["MagmaLink", "?Teetotaller"]
+    dependencies = ["MagmaLink", "?Teetotaller", "?Side Images"]
 
     @staticmethod
     def mod_load():
