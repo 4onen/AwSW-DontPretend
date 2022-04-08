@@ -9,7 +9,7 @@ label mavdp_four_c3investigation_patrol_fix:
 
 label mavdp_four_c3investigation_patrol_fix2:
     Br "Or maybe we're looking at this from the wrong angle. It might not be Reza at all. Plenty of dragons could have managed to sneak up too. It doesn't necessarily have anything to do with Reza or humanity."
-    jump mavdp_four_c3investigation_patrol_fix_end
+    jump mavdp_four_c3investigation_patrol_fix2_end
 
 
 label mavdp_four_bryce3_cancelled:
