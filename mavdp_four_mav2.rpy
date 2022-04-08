@@ -1,5 +1,6 @@
 init:
-    image mavdp_forestcanopy = "bg/mavdp_forestcanopy.png"
+    image maverick rage mavdp_four_dk = im.Recolor("cr/maverick_rage.png", 70, 70, 100, 255)
+    image mavdp_forestcanopy = im.Recolor("bg/mavdp_forestcanopy.png", 70, 70, 100, 255)
     image mavdp_highbranchdown = "bg/mavdp_highbranchdown.png"
 
     default mavdp_four_store.called_for_help = 0
@@ -86,7 +87,7 @@ label mavdp_four_mav2:
             c "Because I wasn't trying to run!"
             stop music fadeout 1.0
             play sound "fx/snarl.ogg"
-            Mv rage dk "Stop treating me like a fool!"
+            Mv rage mavdp_four_dk "Stop treating me like a fool!"
         "[[Go home.]":
             m "It was clear Maverick wasn't going to change his mind, no matter what I said."
             m "His thought that Reza might be sneaking up was evidence of that."
@@ -94,36 +95,36 @@ label mavdp_four_mav2:
             m "I took a few steps back, turning to go."
             stop music fadeout 1.0
             play sound "fx/snarl.ogg"
-            Mv rage dk "Don't walk away from me!"
+            Mv rage mavdp_four_dk "Don't walk away from me!"
 
     play sound "fx/wooshimpact.wav"
-    show maverick rage dk:
+    show maverick rage mavdp_four_dk:
         zoom 1.0
-        linear 0.8 zoom 2.0
+        linear 0.8 zoom 2.0 ypos 1.8 xpos 0.7
     with None
     $ renpy.pause(0.8)
     scene black with hpunch
     m "Before I could react, Maverick pounced at me forepaws-first."
 
-    scene mavdp_forestcanopy at Pan((200, 300), (0, 0), 2.0) with dissolveslow
+    scene mavdp_forestcanopy at Pan((0, 200), (0, 0), 4.0) with dissolveslow
     $ renpy.pause(1.0)
 
     show maverick angry dk:
-        zoom 1.2
+        zoom 1.4
         align (0.5, 0.0)
-        pos (0.5, 0.0)
-        ease 0.5 ypos 0.3
+        pos (0.7, 1.0)
+        ease 1.5 ypos 0.6
     with None
 
     m "Dazed, I came to my senses on my back, Maverick standing on my chest."
 
     Mv angry dk "Enough of this."
-    Mv rage dk "Cry for help! Bring Reza out here and finish me off!"
+    Mv rage mavdp_four_dk "Cry for help! Bring Reza out here and finish me off!"
 
     c "(C-Can't breathe!)"
     m "I batted weakly at his forepaws, trying to get him to take some weight off."
     show maverick angry dk with dissolve
-    show maverick at Transform(ypos=0.2) with ease
+    show maverick at Transform(ypos=0.63) with ease
     m "Thankfully, he moved his paws to either side of me, allowing me to get some full breaths in."
 
     label mavdp_four_mav2_call_for_help_menu:
@@ -140,19 +141,45 @@ label mavdp_four_mav2:
             $ renpy.pause(0.5)
             Mv "..."
             $ renpy.pause(0.5)
-            m "... Nobody came."
+            m "... but nobody came."
             jump mavdp_four_mav2_call_for_help_menu
         "[[Call for help.]" if mavdp_four_store.called_for_help == 1:
             $ mavdp_four_store.called_for_help = 2
             $ renpy.pause(0.5)
-            c "A-Anyone? P-Please..."
+            c "{size=-2}A-Anyone? P-Please...{/size}"
             $ renpy.pause(0.8)
             Mv "..."
             jump mavdp_four_mav2_call_for_help_menu
+        "[[Blubber.]" if mavdp_four_store.called_for_help == 2:
+            $ mavdp_four_store.called_for_help = 3
+            $ renpy.pause(0.5)
+            c "{size=-8}I-I don't want to die. I don't w-want to die.{/size}"
+            $ renpy.pause(0.5)
+            Mv irritated dk "..."
+            Mv annoyed dk "..."
+            jump mavdp_four_mav2_call_for_help_menu
+        "[[Blubber.]" if mavdp_four_store.called_for_help == 3:
+            $ mavdp_four_store.called_for_help = 4
+            show maverick irritated dk with dissolve
+            $ renpy.pause(0.5)
+            c "{size=-8}P-Please don't kill me. I don't want to... I don't want to...{/size}"
+            $ renpy.pause(0.5)
+            Mv annoyed dk "..."
+            Mv rage mavdp_four_dk "{size=+2}Just come out here and finish this!{/size}"
+            jump mavdp_four_mav2_call_for_help_menu
+        "[[Blubber.]" if mavdp_four_store.called_for_help == 4:
+            $ mavdp_four_store.called_for_help = 5
+            show maverick irritated dk with dissolve
+            $ renpy.pause(0.5)
+            c "{size=-8}P-Please--{/size}"
+            play sound ["fx/snarl.ogg","fx/breathing.ogg"]
+            Mv rage mavdp_four_dk "{size=+4}I am going to {i}kill{/i} [player_name]!{/size}"
+            $ renpy.pause(3.0)
+            m "... but nobody came."
         "[[Try to run.]" if mavdp_four_store.called_for_help < 1 and mavdp_four_store.tried_to_run == False:
             $ mavdp_four_store.tried_to_run = True
             play sound "fx/growl.ogg"
-            show maverick rage dk with dissolve
+            show maverick rage mavdp_four_dk with dissolve
             $ renpy.pause(0.8)
             m "I barely shuffled a few inches backward before his forepaws were back on my chest and, this time, neck, pressing down with more vehemence."
             m "I grabbed his leg, struggling to hold up his weight as my windpipe strained against the crushing force."
@@ -163,15 +190,15 @@ label mavdp_four_mav2:
         "[[Plead.]":
             c "Maverick, please. I'm not working with Reza. He's not here."
             if mavdp_four_store.called_for_help < 1:
-                Mv rage dk "Call for him!"
+                Mv rage mavdp_four_dk "Call for him!"
                 jump mavdp_four_mav2_call_for_help_menu
-            Mv rage dk "Where is he?!{w=0.8}{nw}"
+            Mv rage mavdp_four_dk "Where is he?!"
             c "I don't know! {w}Just let me up! Please!"
         "[[Threaten.]":
             c "You just attacked an ambassador unprovoked, Maverick. You'll pay for this..."
             if mavdp_four_store.called_for_help < 1:
                 Mv angry dk "As if that will matter when you have him kill me."
-                Mv rage dk "Call for him!"
+                Mv rage mavdp_four_dk "Call for him!"
                 jump mavdp_four_mav2_call_for_help_menu
             c "Now let me up."
 
@@ -179,17 +206,18 @@ label mavdp_four_mav2:
     m "It finally seemed to dawn on Maverick what he'd done: that he'd attacked me, unprovoked, out in the woods, without proof."
     show maverick lost dk with dissolve
     m "Reza wasn't there to kill him, like he expected, because I wasn't working with Reza."
+    play music "mx/mavdp_dire_politics.ogg" fadein 2.0
     show maverick angry dk with dissolve
     m "It was too much to hope that last point made it through to him."
-    play music "mx/mavdp_dire_politics.ogg" fadein 2.0
 
+    play sound "fx/liftbody.ogg"
     show maverick angry dk:
-        linear 0.5 ypos -2.0 zoom 4.0
+        linear 0.5 ypos 0.0 zoom 2.5
     with None
     scene black with dissolvemed
+    stop sound fadeout 0.5
     c "M-Maverick!"
 
-    stop music fadeout 2.0
     play sound "fx/wooshes.ogg"
     m "Grabbing me to his chest, Maverick took to the sky, hauling me nearly straight up."
     c "What are you doing? Mav--"
@@ -200,14 +228,14 @@ label mavdp_four_mav2:
         align (0.5, 0.0)
         pos (0.5, 0)
         parallel:
-            ease 0.8 xpos 0.51
-            ease 0.8 xpos 0.49
+            ease 1.6 xpos 0.501
+            ease 1.6 xpos 0.499
             repeat
         parallel:
             linear 3.0 ypos -160
             block:
-                ease 0.6 ypos -100
-                ease 0.8 ypos -160
+                ease 1.6 ypos -150
+                ease 1.8 ypos -160
                 repeat
     with dissolvemed
     $ renpy.pause(1.5)
@@ -219,11 +247,12 @@ label mavdp_four_mav2:
 
     c "I don't know anything--"
 
-    Mv rage dk "{size=+6}Everything!{/size}"
+    play sound "fx/snarl.ogg"
+    Mv rage mavdp_four_dk "{size=+8}Everything!{/size}"
+    stop sound fadeout 0.5
 
     c "I-- I came as an ambassador to oversee the trade deal!"
-    c "Our PDAs for your generators!"
-    c "That's it!"
+    c "Our PDAs for your generators! {w=1.0}That's it!"
 
     Mv angry dk "And the murders? The thefts?"
 
@@ -235,13 +264,19 @@ label mavdp_four_mav2:
     $ renpy.pause (0.5)
     c "Maverick, {i}please{/i}!"
 
-    stop music fadeout 10.0
 
     $ renpy.pause (0.8)
-
-    Mv lost dk "..."
-    $ renpy.pause (0.5)
+    m "A few moments of silence passed, with only the swaying of the branch and the shuddering of my arms as I held on letting me know time was passing."
+    if mavdp_four_store.has_side_images():
+        Mv angry dk "..."
+        $ renpy.pause (0.8)
+        Mv irritated dk "..."
+        $ renpy.pause (0.8)
+    Mv lost dk "I..."
+    stop music fadeout 10.0
+    $ renpy.pause (0.8)
     Mv nice lost dk "I'm going to pick you up and take us down."
+    $ renpy.pause (0.5)
     menu:
         "Please do, asshole!":
             $ renpy.pause (0.5)
@@ -252,19 +287,19 @@ label mavdp_four_mav2:
     scene black with dissolvemed
     $ renpy.pause (0.5)
     play sound "fx/woosh2.ogg"
-    queue sound "fx/wooshimpact.ogg"
+    queue sound "fx/wooshimpact.wav"
     $ renpy.pause(2.0)
     m "The descent from the tree was fast, and clearly a little less controlled than Maverick intended."
-    scene forestx
+    scene forestx at top
     show maverick lost dk
     with dissolveslow
     m "Nothing felt broken, though, as I picked myself up off the ground."
 
-    start music "mx/mavdp_deep_judgement.ogg"
+    play music "mx/mavdp_deep_judgement.ogg"
     $ renpy.pause(0.5)
 
     Mv "I..."
-    Mv despair dk "I have no excuse for my actions tonight, [player_name]."
+    Mv lost dk "I have no excuse for my actions tonight, [player_name]."
     Mv lost dk "I was convinced in your collusion with Reza, and thought any means of getting a confession would be justified."
     Mv lost dk "I was wrong."
 
@@ -276,13 +311,15 @@ label mavdp_four_mav2:
             Mv lost dk "..."
             c "Which way is my apartment?"
             show maverick lost dk at Position(xpos=0.49) with ease
+            $ renpy.pause(0.8)
             play sound "fx/steps/rough_gravel.wav"
             scene black with dissolve
             stop music fadeout 5.0
             $ renpy.pause(0.8)
             m "Without another word, I left him in the woods, already planning what I'd say to Bryce on the phone."
+            stop sound fadeout 0.5
             $ mavdp_four_store.maverickstatus = "reported"
-            jump _mod_fixjmp
+            jump ml_date_end
         "Yeah. You were.":
             c "This... Maverick, this was too much."
             $ renpy.pause (0.5)
@@ -295,12 +332,13 @@ label mavdp_four_mav2:
             play sound "fx/steps/rough_gravel.wav"
             scene black with dissolveslow
             $ renpy.pause(0.5)
-            Mv "{size=-4}I'm sorry.{/size}"
+            Mv "{size=-8}I'm sorry.{/size}"
             $ mavdp_four_store.maverickstatus = "neutral"
             stop music fadeout 1.0
+            stop sound fadeout 1.0
             $ renpy.pause(0.5)
-            jump _mod_fixjmp
-        "I understand.":
+            jump ml_date_end
+        "I understand, though.":
             c "You... I mean, strange people from another world? People turning up dead? In your shoes, I probably would have had the same reaction."
             $ renpy.pause (0.5)
             Mv lost dk "It doesn't excuse my actions."
@@ -309,9 +347,15 @@ label mavdp_four_mav2:
 
             $ renpy.pause(0.8)
             c "You're not wrong. But I don't blame you."
-            c "I don't want to lose this chance to work together on the investigation over this."
+            c "I don't want to lose our ability to work together on the investigation over this."
+            c "We need to find Reza before anyone else gets hurt. That means every advantage we can get."
+            c "Communicating openly is an advantage."
 
-            Mv nice dk "Even after I assaulted you? You would seek to be my friend?"
+            $ renpy.pause(0.5)
+
+            Mv nice dk "Even after I assaulted you? Threatened you? You could stand being around me?"
+
+            $ renpy.pause(0.5)
 
             c "I don't know. But I'm not slamming the door over this misunderstanding."
             m "I winced, chest throbbing from where he'd pounced me."
@@ -322,6 +366,4 @@ label mavdp_four_mav2:
             $ renpy.pause(0.5)
             m "Wordlessly, Maverick came to my aid, helping me limp the moderate distance back to the apartment."
             $ mavdp_four_store.maverickstatus = "good"
-            jump _mod_fixjmp
-
-    $ renpy.error("TODO: Remainder of the scene.")
+            jump ml_date_end
