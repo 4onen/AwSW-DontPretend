@@ -67,7 +67,18 @@ label mavdp_four_mav3:
     m "Noticing Maverick, her face fell."
     Ad think b flip "Is this some kind of police business?"
 
-    c "Yes and no."
+    menu:
+        "Yes and no.":
+            $ renpy.pause (0.5)
+        "It's just two friends... uh... meeting.":
+            $ renpy.pause (1.2)
+        "It's a date.":
+            $ mavdp_four_store.mav3mood -= 1
+            show maverick annoyed flip with dissolve
+            $ renpy.pause (0.5)
+        "Nope.":
+            show maverick normal flip with dissolve
+
     Mv "Order what you ordered when you were here."
     c "Ah..."
     if food == "coffee":
@@ -89,11 +100,10 @@ label mavdp_four_mav3:
             "Can we have coffee in reserve?":
                 $ renpy.pause (0.5)
                 c "For after we finish the part about trying to remember."
-                $ renpy.error("TODO: coffee in reserve")
             "Can we have scrambled eggs and bacon in reserve?":
                 $ renpy.pause (0.5)
                 c "For after we finish the part about trying to remember."
-                $ renpy.error("TODO: scrambled eggs and bacon in reserve")
+                $ mavdp_four_store.mav3mood += 1
             "Alright, fine.":
                 $ renpy.pause (0.5)
                 $ mavdp_four_store.mav3mood += 1
@@ -145,7 +155,7 @@ label mavdp_four_mav3:
     hide adine with easeoutleft
 
     Mv "How did you figure out how to read the letter?"
-    c "I saw lemons in the pantry and remembered a science class Reza and I once took together."
+    c "I saw lemons in the pantry of my apartment, and remembered a science class Reza and I once took together."
     $ renpy.pause (0.5)
     Mv "Let's move ahead. When you met Reza at the portal."
 
@@ -170,9 +180,11 @@ label mavdp_four_mav3:
     c "He said it would take a while to explain. That was the last thing."
 
     if food == "coffee":
-        m "I shifted my coffee mug, which was nearly empty at this point in the conversation. Maverick hadn't touched his."
+        m "I shifted my coffee mug, which was nearly empty at this point in the conversation."
+        m "Maverick's was still full."
     elif food == "eggs":
-        m "I prodded some eggs across my plate, appetite waning with the weight of the subject matter. Maverick hadn't touched his food."
+        m "I prodded some eggs across my plate, appetite waning with the weight of the subject matter."
+        m "Maverick had done away with his bacon, but little else."
     elif food == "fish":
         m "I prodded some fish across my plate, the smell not doing any favors for my desire to eat it, especially with the weight of the subject matter."
         m "Maverick had stripped off and eaten a few small chunks of his, but otherwise focused on me with rapt attention."
